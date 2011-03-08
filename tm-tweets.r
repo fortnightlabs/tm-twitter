@@ -16,8 +16,9 @@ if(all(rownames(installed.packages()) != 'RWeka')) install.packages('RWeka')
 # load the libraries
 library(twitteR)
 library(tm)
-library(openNLP)
-library(RWeka)
+# library(Snowball)
+# library(openNLP)
+# library(RWeka)
 
 # get 100 of gerad's friends
 friends <- userFriends('gerad', n=100)
@@ -36,8 +37,7 @@ tweetsText <- unlist(Map(statusText, tweets))
 tweetsCorpus <- Corpus(VectorSource(tweetsText))
 
 # create a term document matrix for the tweets (doing some basic cleanup along the way)
-# note that here is where we'd use different weighting functions, for example TfIdf
-# we can also use n-grams instead of single words here, and do stemming
+# here is where we'd use different weighting functions, for example TfIdf
 tweetsTDM <- TermDocumentMatrix(tweetsCorpus,
   control = list(
     # tokenize = tokenize,        # use the opennlp POS tokenizer
